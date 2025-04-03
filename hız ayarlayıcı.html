@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>İndirme Süresi Hesaplayıcı</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    input, button {
+      margin: 10px;
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+<h1>İndirme Süresi Hesaplayıcı ⏳</h1>
+<label for="speed">İnternet Hızı (Mbps):</label>
+<input type="number" id="speed" placeholder="Mbps">
+<br>
+<label for="size">Dosya Boyutu (GB):</label>
+<input type="number" id="size" placeholder="GB">
+<br>
+<button onclick="hesapla()">Hesapla</button>
+<p id="sonuc"></p>
+
+<script>
+  function hesapla() {
+    let speed = parseFloat(document.getElementById("speed").value);
+    let size = parseFloat(document.getElementById("size").value);
+    if (speed > 0 && size > 0) {
+      let speedMB = speed * 0.125; // Mbps -> MB/s dönüşümü
+      let sizeMB = size * 1024;   // GB -> MB dönüşümü
+      let sure = sizeMB / speedMB; // Saniye cinsinden süre
+      let dakika = Math.floor(sure / 60);
+      let saniye = Math.floor(sure % 60);
+      document.getElementById("sonuc").innerHTML = `Tahmini Süre: ${dakika} dakika ${saniye} saniye`;
+    } else {
+      document.getElementById("sonuc").innerHTML = "Lütfen geçerli değerler girin!";
+    }
+  }
+</script>
+</body>
+</html>
